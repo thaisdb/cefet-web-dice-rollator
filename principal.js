@@ -12,9 +12,7 @@
 // #quantidadeD{4,6,8,10,12,20}: um ID para cada input[type=number] com a quantidade
 
 let button = document.getElementById('rolar');
-let dices = document.getElementsByClassName('dado');
-let result = document.getElementById('resultado');
-let quantidadeD = [4,6,8,10,12,20];
+const quantidadeD = [4,6,8,10,12,20];
 
 
 button.addEventListener('click', compute);
@@ -22,20 +20,22 @@ button.addEventListener('click', compute);
 function compute(){
     
     document.getElementById('recipienteResultados').classList.remove('oculto');
+    let dices = document.getElementsByClassName('dado');
     let index = 0;
-    result.innerHTML = '';
+    let html = '';
     for (let dice of dices){
         let sum = 0
         for (let i = 0; i < dice.children[1].value; i++){
             let rand = Math.ceil(Math.random() * quantidadeD[index]);
             sum += rand; 
             if (i < dice.children[1].value - 1){
-                result.innerHTML += rand + ' + ';
+                html += rand + ' + ';
             } else { 
-                result.innerHTML += rand + ' = ' + sum + '<br>';
+                html += rand + ' = ' + sum + '<br>';
             }
         }
         index ++;
     }
+    document.getElementById('resultado').innerHTML = html;
 }
 

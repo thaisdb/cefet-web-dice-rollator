@@ -14,19 +14,30 @@
 let button = document.getElementById('rolar');
 let dices = document.getElementsByClassName('dado');
 let result = document.getElementById('recipienteResultados');
+let quantidadeD = [4,6,8,10,12,20];
 
 button.addEventListener('click', compute);
 
 function compute(){
+    
     if (result.classList.contains('oculto')){
         result.classList.remove('oculto');
     }
+    let index = 0;
     for (let dice of dices){
-        let rand = Math.ceil(Math.random() * Number(dice.children[1].max));
-        let finalNumber = Number(dice.children[1].value) * rand; 
-        result.innerHTML += dice.children[1].value + ' * ' + rand + ' = ' +  finalNumber + '<br>';
-        
-        //result.innerHTML += value;
+        let finalNumber = 0
+        let html = ''
+        for (let i = 0; i < dice.children[1].value; i++){
+            let rand = Math.ceil(Math.random() * quantidadeD[index]);
+            finalNumber += rand; 
+            if (i < dice.children[1].value - 1){
+                html += rand + ' + ';
+            } else { 
+                html +=  rand + ' = ' + finalNumber + '<br>';
+            }
+            result.innerHTML += html;
+        }
+        index ++;
     }
-
 }
+

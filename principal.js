@@ -13,29 +13,27 @@
 
 let button = document.getElementById('rolar');
 let dices = document.getElementsByClassName('dado');
-let result = document.getElementById('recipienteResultados');
+let result = document.getElementById('resultado');
 let quantidadeD = [4,6,8,10,12,20];
+
 
 button.addEventListener('click', compute);
 
 function compute(){
     
-    if (result.classList.contains('oculto')){
-        result.classList.remove('oculto');
-    }
+    document.getElementById('recipienteResultados').classList.remove('oculto');
     let index = 0;
+    result.innerHTML = '';
     for (let dice of dices){
-        let finalNumber = 0
-        let html = ''
+        let sum = 0
         for (let i = 0; i < dice.children[1].value; i++){
             let rand = Math.ceil(Math.random() * quantidadeD[index]);
-            finalNumber += rand; 
+            sum += rand; 
             if (i < dice.children[1].value - 1){
-                html += rand + ' + ';
+                result.innerHTML += rand + ' + ';
             } else { 
-                html +=  rand + ' = ' + finalNumber + '<br>';
+                result.innerHTML += rand + ' = ' + sum + '<br>';
             }
-            result.innerHTML += html;
         }
         index ++;
     }
